@@ -1,0 +1,34 @@
+
+.modal-open .modal, .btn:focus, a:focus {
+  outline: none !important; 
+}
+
+.modal .modal-content {
+  width: 265px;
+  margin: auto; 
+}
+
+.btn-success {
+  background-color: rgba(255, 255, 255, 0.5);
+  /* medium blue */
+  border-color: #ffffff;
+  /* medium blue */ 
+}
+
+.btn-success:hover {
+  color: #fff;
+  background-color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.5);
+  /* medium blue */ 
+}
+
+#pnlBookingForm {
+     padding-left: 10px;
+     padding-top: 10px;
+ }
+
+ sup {
+     color: red;
+ }
+
+
