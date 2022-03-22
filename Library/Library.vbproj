@@ -99,6 +99,7 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\library.css" />
     <Content Include="Index.aspx" />
+    <Content Include="Search.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -128,6 +129,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Search.aspx.designer.vb">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search.aspx.vb">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>

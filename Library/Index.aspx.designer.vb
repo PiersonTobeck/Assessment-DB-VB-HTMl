@@ -12,4 +12,67 @@ Option Explicit On
 
 
 Partial Public Class Index
+
+    '''<summary>
+    '''form1 control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+
+    '''<summary>
+    '''pnlBookForm control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents pnlBookForm As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''txtTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtTitle As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtAuthor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtAuthor As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtPublisher control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtPublisher As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtISBN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtISBN As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''txtValue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents txtValue As Global.System.Web.UI.WebControls.TextBox
 End Class

@@ -36,7 +36,7 @@
 		    </button>
 				
 		    <!-- Logo goes here -->
-			
+			    
 		    <h1> Library </h1>
 	    </div> <!-- End of navbar-header -->
 	
@@ -56,11 +56,29 @@
     <div class="container">
 	    <div class="main">
 
-	        <h1>Booking Form</h1>
+	        <h1>Add book</h1>
 
-            <form id ="form1" runat="server"
+            <form id="form1" runat="server">
 
-                <asp:Panel ID="pnlLibrary"
+                <asp:Panel ID="pnlBookForm" runat="server" Height="200px">
+                    Title*:<br />
+                    <asp:TextBox ID="txtTitle" runat="server"></asp:TextBox>
+                    <br />
+                    Author*:<br />
+                    <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                    <br />
+                    Publisher*:<br />
+                    <asp:TextBox ID="txtPublisher" runat="server"></asp:TextBox>
+                    <br />
+                    ISBN*:<br />
+                    <asp:TextBox ID="txtISBN" runat="server"></asp:TextBox>
+                    <br />
+                    Value*:<br />
+                    <asp:TextBox ID="txtValue" runat="server"></asp:TextBox>
+                    <br />
+                </asp:Panel>
+
+                </form>
 
              <!-- End booking form -->
 	
