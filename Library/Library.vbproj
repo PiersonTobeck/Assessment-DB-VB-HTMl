@@ -96,20 +96,40 @@
     <Content Include="App_Data\Books_log.ldf">
       <DependentUpon>Books.mdf</DependentUpon>
     </Content>
+    <Content Include="Contact.aspx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\library.css" />
+    <Content Include="Edit.aspx" />
+    <Content Include="footer.html" />
+    <Content Include="Header_Nav.html" />
     <Content Include="Index.aspx" />
+    <Content Include="RawData.aspx" />
     <Content Include="Search.aspx" />
+    <Content Include="Success.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="book.vb" />
+    <Compile Include="Contact.aspx.designer.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Contact.aspx.vb">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Edit.aspx.designer.vb">
+      <DependentUpon>Edit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Edit.aspx.vb">
+      <DependentUpon>Edit.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Index.aspx.designer.vb">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
     <Compile Include="Index.aspx.vb">
       <DependentUpon>Index.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
@@ -130,11 +150,25 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RawData.aspx.designer.vb">
+      <DependentUpon>RawData.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RawData.aspx.vb">
+      <DependentUpon>RawData.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Search.aspx.designer.vb">
       <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="Search.aspx.vb">
       <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="Success.aspx.designer.vb">
+      <DependentUpon>Success.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Success.aspx.vb">
+      <DependentUpon>Success.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
   </ItemGroup>

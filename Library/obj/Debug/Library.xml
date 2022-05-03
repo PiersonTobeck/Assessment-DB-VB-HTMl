@@ -131,9 +131,27 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:Library.Index._rfvTitle">
+<summary>
+rfvTitle control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:Library.Index._txtAuthor">
 <summary>
 txtAuthor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvAuthor">
+<summary>
+rfvAuthor control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -149,9 +167,36 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:Library.Index._rfvPublisher">
+<summary>
+rfvPublisher control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:Library.Index._txtISBN">
 <summary>
 txtISBN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._revISBN">
+<summary>
+revISBN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvISBN">
+<summary>
+rfvISBN control.
 </summary>
 <remarks>
 Auto-generated field.
@@ -167,9 +212,27 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
-<member name="F:Library.Search._form1">
+<member name="F:Library.Index._revValue">
 <summary>
-form1 control.
+revValue control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvValue">
+<summary>
+rfvValue control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._btnSubmit">
+<summary>
+btnSubmit control.
 </summary>
 <remarks>
 Auto-generated field.

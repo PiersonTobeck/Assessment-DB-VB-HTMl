@@ -41,6 +41,15 @@ Partial Public Class Index
     Protected WithEvents txtTitle As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''rfvTitle control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvTitle As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''txtAuthor control.
     '''</summary>
     '''<remarks>
@@ -48,6 +57,15 @@ Partial Public Class Index
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtAuthor As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''rfvAuthor control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvAuthor As Global.System.Web.UI.WebControls.RequiredFieldValidator
 
     '''<summary>
     '''txtPublisher control.
@@ -59,6 +77,15 @@ Partial Public Class Index
     Protected WithEvents txtPublisher As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''rfvPublisher control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvPublisher As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''txtISBN control.
     '''</summary>
     '''<remarks>
@@ -68,6 +95,24 @@ Partial Public Class Index
     Protected WithEvents txtISBN As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''revISBN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents revISBN As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''rfvISBN control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvISBN As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
     '''txtValue control.
     '''</summary>
     '''<remarks>
@@ -75,4 +120,31 @@ Partial Public Class Index
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents txtValue As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''revValue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents revValue As Global.System.Web.UI.WebControls.RegularExpressionValidator
+
+    '''<summary>
+    '''rfvValue control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents rfvValue As Global.System.Web.UI.WebControls.RequiredFieldValidator
+
+    '''<summary>
+    '''btnSubmit control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents btnSubmit As Global.System.Web.UI.WebControls.Button
 End Class

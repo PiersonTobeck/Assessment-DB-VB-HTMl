@@ -1,34 +1,82 @@
-
-.modal-open .modal, .btn:focus, a:focus {
-  outline: none !important; 
+body {
+    background-color: ;
 }
 
-.modal .modal-content {
-  width: 265px;
-  margin: auto; 
+
+.navbar.navbar-default {
+    background-color: darkred;
 }
 
-.btn-success {
-  background-color: rgba(255, 255, 255, 0.5);
-  /* medium blue */
-  border-color: #ffffff;
-  /* medium blue */ 
+.navbar.navbar-default > .navbar-header > h1 {
+    color: darkgreen;
+    padding-left: 25px; 
+    font-weight: bold;
+
 }
 
-.btn-success:hover {
-  color: #fff;
-  background-color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.5);
-  /* medium blue */ 
+.footer {
+    text-align:right;
 }
+
+.navbar-default.navbar-nav > li > a:link {
+    color:aqua;
+    font-weight: bold;
+}
+
+.navbar-default.navbar-nav > li > a:hover {
+    color: deeppink;
+    font-weight: bold;
+}
+
+.navbar-default.navbar-nav > li > a:visited {
+    color: rebeccapurple;
+    font-weight: bold;  
+}
+
+
 
 #pnlBookingForm {
      padding-left: 10px;
      padding-top: 10px;
+     background-color: rebeccapurple;
  }
 
  sup {
      color: red;
  }
 
+ table.data {
+     text-align: left;
+     border: 3px solid black;
+     border-collapse: collapse; 
+ }
 
+tr.data {
+    margin-top: 12px;
+    margin-bottom: 12px;
+    height: 24px;
+}
+
+th.data {
+    height: 36px;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    background-color: #010C22;
+    color: #ffffff;
+}
+
+tr.data:nth-child(even) {
+    background-color: rgb(128,128,230);
+
+}
+
+tr.data:nth-child(odd) {    
+    background-color: #ffffff
+}
+
+td.data {
+    padding: 10px;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
