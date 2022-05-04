@@ -9,6 +9,7 @@ Public Class Index
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
 
+4`
     End Sub
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
@@ -26,12 +27,24 @@ Public Class Index
         Dim Intisbn As Double = Convert.ToDouble(txtISBN.Text)
         Dim intValue As Double = Convert.ToDouble(txtValue.Text)
 
-        'send the data
+        Dim AuthorID As String = String.Empty
+        Dim BookID As String = String.Empty
 
-        'Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\dbLibrary.mdf';Integrated Security=True"
+        'grab data for the Authors table
+
+        Dim AuthorArray As String() = Split(strAuthor)
+
+        Dim AuthorFName As String = AuthorArray(0)
+        Dim AuthorLName As String = AuthorArray(1)
+
+
+
+
+        'send the data 
+
         Dim strconn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
-        Dim strSQL As String = "INSERT INTO books ([Title], [Author], [Publisher], [ISBN], [ESTValue]) VALUES ("
-        strSQL &= "@title,@author,@publisher,@isbn,@value)"
+        Dim strSQL As String = "INSERT INTO books ([Title], [Publisher], [ISBN], [ESTValue]) VALUES ("
+        strSQL &= "@title,@publisher,@isbn,@value)"
         Dim sqlCmd As SqlCommand
         Dim sqlConn As New SqlConnection(strconn)
 
@@ -45,7 +58,6 @@ Public Class Index
             With sqlCmd.Parameters
 
                 .AddWithValue("@title", strTitle)
-                .AddWithValue("@author", strAuthor)
                 .AddWithValue("@publisher", strPublisher)
                 .AddWithValue("@isbn", IntISBN)
                 .AddWithValue("@value", intValue)
@@ -85,7 +97,7 @@ Public Class Index
 
         Dim ISBNS As Double()
 
-        ISBNS(0) = 5.05
+        'check database if any book has an isbn of book being inserted
 
 
 
@@ -101,5 +113,7 @@ Public Class Index
 
     End Sub
 
+    Protected Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTitle.TextChanged
 
+    End Sub
 End Class

@@ -18,6 +18,7 @@
                         <br />
                     Author<sup>*</sup>:<br />
                         <asp:TextBox ID="txtAuthor" runat="server"></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="revAuthor" runat="server" ControlToValidate="txtAuthor" ErrorMessage="A Valid Author Is Required" ValidationExpression="^[a-zA-Z]{2,40}(?: +[a-zA-Z]{2,40})+$"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="rfvAuthor" runat="server" ControlToValidate="txtAuthor" Display="Dynamic" ErrorMessage="Author Required">An Author Is Required</asp:RequiredFieldValidator>
                         <br />
                     Publisher<sup>*</sup>:<br />
@@ -55,6 +56,3 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
     <script src="js/bootstrap.min.js"></script>
-   
-</body>
-</html>
