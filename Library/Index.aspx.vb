@@ -8,8 +8,6 @@ Public Class Index
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-
-4`
     End Sub
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
@@ -89,7 +87,7 @@ Public Class Index
 
         ClearForm()
 
-        Response.Redirect("RawData.aspx")
+        Response.Redirect("success.aspx")
 
     End Sub
 
@@ -113,7 +111,26 @@ Public Class Index
 
     End Sub
 
+    Private Sub setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double)
+
+        'create new sql statement
+        Dim strSQL As String = "SELECT from "
+
+        Dim strSQL2 As String = ""
+
+        'objects for communication with db
+        Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
+
+
+        Dim sqlcmd As SqlCommand
+        Dim sqlconn As New SqlConnection(strConn)
+        Dim sqlDA As New SqlDataAdapter
+        Dim ds As New DataSet
+
+    End Sub
+
     Protected Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTitle.TextChanged
 
     End Sub
+
 End Class

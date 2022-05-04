@@ -1,15 +1,20 @@
 ﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Success.aspx.vb" Inherits="Library.Success" %>
 
-<!DOCTYPE html>
+<%  Response.WriteFile("Header_Nav.html") %>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
-</html>
+<div class="container">
+
+    <div class ="main">
+
+        <h1>Success</h1>
+
+        <p>
+            Book has been logged
+        </p>
+
+    </div>
+
+</div>
+
+
+<%  Response.WriteFile("footer.html") %>
