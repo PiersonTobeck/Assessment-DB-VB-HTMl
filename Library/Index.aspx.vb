@@ -72,9 +72,9 @@ Public Class Index
 
             End If
 
-            'sqlCmd.ExecuteNonQuery()
-
             sqlConn.Close()
+
+
 
         Catch ex As Exception
 
@@ -84,13 +84,15 @@ Public Class Index
 
         End Try
 
-
         ClearForm()
+
+        Call setSessionID(strTitle, strAuthor, strPublisher, Intisbn, intValue)
 
         Response.Redirect("success.aspx")
 
     End Sub
 
+    'need to do this
     Public Sub CheckforDupeISBN()
 
         Dim ISBNS As Double()
@@ -114,7 +116,7 @@ Public Class Index
     Private Sub setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double)
 
         'create new sql statement
-        Dim strSQL As String = "SELECT from "
+        Dim strSQL As String = "SELECT Bid FROM books where [Title] = @title AND [Author] = @author AND [Publisher] = @publisher AND [ISBN] = @isbn AND [EstValue] = @value"
 
         Dim strSQL2 As String = ""
 
@@ -126,6 +128,60 @@ Public Class Index
         Dim sqlconn As New SqlConnection(strConn)
         Dim sqlDA As New SqlDataAdapter
         Dim ds As New DataSet
+
+        Try
+            'open connection
+            sqlconn.Open()
+            sqlcmd = New SqlCommand(strSQL, sqlconn)
+
+            'complete query
+            With sqlcmd.Parameters
+
+                .AddWithValue("@title", strTitle)
+                .AddWithValue("@author", strAuthor)
+                .AddWithValue("@publisher", strPublisher)
+                .AddWithValue("@isbn", intISBN)
+                .AddWithValue("@value", intValue)
+
+            End With
+
+            'run query and fill ds
+
+            sqlDA.SelectCommand = sqlcmd
+            sqlDA.Fill(ds)
+
+            'check a row has been returned
+
+            If ds.Tables(0).Rows.Count > 0 Then
+
+                Dim intID As Integer = ds.Tables(0).Rows(0).Item(0)
+
+                'set session object
+
+                Session("Bid") = intID
+
+            End If
+
+        Catch ex As Exception
+
+            MsgBox("An Eror has occured")
+
+        Finally
+
+            'tidy up resources
+
+            sqlDA.Dispose()
+            ds.Dispose()
+
+            'check connection status and close
+
+            If sqlconn.State = ConnectionState.Open Then
+
+                sqlconn.Close()
+
+            End If
+
+        End Try
 
     End Sub
 
