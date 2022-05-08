@@ -32,11 +32,7 @@ Public Class Index
 
         Dim AuthorArray As String() = Split(strAuthor)
 
-        Dim AuthorFName As String = AuthorArray(0)
-        Dim AuthorLName As String = AuthorArray(1)
-
-
-
+        Call InsertAuthor(AuthorArray(0), AuthorArray(1))
 
         'send the data 
 
@@ -78,7 +74,7 @@ Public Class Index
 
         Catch ex As Exception
 
-            MsgBox("An Eror has occured")
+            MsgBox("An Eror has occured (01)")
 
             Exit Sub
 
@@ -86,23 +82,58 @@ Public Class Index
 
         ClearForm()
 
-        Call setSessionID(strTitle, strAuthor, strPublisher, Intisbn, intValue)
+
+        'set BookID                                
+        BookID = setSessionID(strTitle, strAuthor, strPublisher, Intisbn, intValue)
 
         Response.Redirect("success.aspx")
 
     End Sub
 
-    'need to do this
-    Public Sub CheckforDupeISBN()
+    Public Sub InsertAuthor(Firstname As String, lastname As String)
+        'send the data 
 
-        Dim ISBNS As Double()
+        Dim strconn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
+        Dim strSQL As String = "INSERT INTO authors ([FirstName], [LastName]) VALUES ("
+        strSQL &= "@fname,@lname)"
+        Dim sqlCmd As SqlCommand
+        Dim sqlConn As New SqlConnection(strconn)
 
-        'check database if any book has an isbn of book being inserted
+        Try
 
+
+            'open connection
+            sqlConn.Open()
+            sqlCmd = New SqlCommand(strSQL, sqlConn)
+
+            With sqlCmd.Parameters
+
+                .AddWithValue("@fname", Firstname)
+                .AddWithValue("@lname", lastname)
+            End With
+
+            'execute query
+            Dim i As Integer = sqlCmd.ExecuteNonQuery()
+
+            'check if it failed
+            If i = 0 Then
+
+                Throw New System.Exception("An exception has occurred.")
+
+            End If
+
+            sqlConn.Close()
+
+
+
+        Catch ex As Exception
+
+            MsgBox("An Eror has occured (03)")
+
+        End Try
 
 
     End Sub
-
     Public Sub ClearForm()
 
         txtTitle.Text = String.Empty
@@ -113,12 +144,12 @@ Public Class Index
 
     End Sub
 
-    Private Sub setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double)
+    Private Function setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double)
 
         'create new sql statement
-        Dim strSQL As String = "SELECT Bid FROM books where [Title] = @title AND [Author] = @author AND [Publisher] = @publisher AND [ISBN] = @isbn AND [EstValue] = @value"
+        Dim strSQL As String = "SELECT Bid FROM books where [Title] = @title AND [Publisher] = @publisher AND [ISBN] = @isbn AND [EstValue] = @value"
 
-        Dim strSQL2 As String = ""
+
 
         'objects for communication with db
         Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
@@ -129,6 +160,8 @@ Public Class Index
         Dim sqlDA As New SqlDataAdapter
         Dim ds As New DataSet
 
+        Dim returnvariable
+
         Try
             'open connection
             sqlconn.Open()
@@ -138,7 +171,6 @@ Public Class Index
             With sqlcmd.Parameters
 
                 .AddWithValue("@title", strTitle)
-                .AddWithValue("@author", strAuthor)
                 .AddWithValue("@publisher", strPublisher)
                 .AddWithValue("@isbn", intISBN)
                 .AddWithValue("@value", intValue)
@@ -160,11 +192,14 @@ Public Class Index
 
                 Session("Bid") = intID
 
+                'set return variable
+                returnvariable = intID
+
             End If
 
         Catch ex As Exception
 
-            MsgBox("An Eror has occured")
+            MsgBox("An Eror has occured (02)")
 
         Finally
 
@@ -183,8 +218,21 @@ Public Class Index
 
         End Try
 
-    End Sub
+        Return returnvariable
 
+    End Function
+
+
+    Private Function getAuthorID(firtname, lastname)
+
+        Dim strSQL As String = "SELECT Aid from authors where [FirstName] = @fname AND [LastName] = @lname"
+        Dim AuthorID As Integer
+
+
+
+        Return AuthorID
+
+    End Function
     Protected Sub txtTitle_TextChanged(sender As Object, e As EventArgs) Handles txtTitle.TextChanged
 
     End Sub
