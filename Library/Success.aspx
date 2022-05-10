@@ -9,12 +9,19 @@
         <h1>Success</h1>
 
         <p>
+
             Book has been logged
-        </p>
+
+            </p>
+
+        <asp:placeholder ID="plhDataTable" runat="server">
+
+
+        </asp:placeholder>
+
+            </div>
 
     </div>
-
-</div>
 
 
 <%  Response.WriteFile("footer.html") %>

@@ -99,7 +99,6 @@
     <Content Include="Contact.aspx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\library.css" />
-    <Content Include="Edit.aspx" />
     <Content Include="footer.html" />
     <Content Include="Header_Nav.html" />
     <Content Include="Index.aspx" />
@@ -115,13 +114,6 @@
     </Compile>
     <Compile Include="Contact.aspx.vb">
       <DependentUpon>Contact.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
-    </Compile>
-    <Compile Include="Edit.aspx.designer.vb">
-      <DependentUpon>Edit.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Edit.aspx.vb">
-      <DependentUpon>Edit.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="Index.aspx.designer.vb">
@@ -162,14 +154,14 @@
     </Compile>
     <Compile Include="Search.aspx.vb">
       <DependentUpon>Search.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Success.aspx.designer.vb">
       <DependentUpon>Success.aspx</DependentUpon>
     </Compile>
     <Compile Include="Success.aspx.vb">
       <DependentUpon>Success.aspx</DependentUpon>
-      <SubType>ASPXCodebehind</SubType>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
