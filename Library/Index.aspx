@@ -3,6 +3,9 @@
 <%  Response.WriteFile("Header_Nav.html") %>
 
 <!-- Main content div starts below -->
+<!-- Links for css, bootstrap -->
+    <link href="css/library.css" rel="stylesheet" type="text/css" />	<!-- edit the file name -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />	<!-- edit the file name -->
     <div class="container">
 	    <div class="main">
 
@@ -32,7 +35,7 @@
                         <br />
                     Value<sup>*</sup>:<br />
                         <asp:TextBox ID="txtValue" runat="server"></asp:TextBox>
-                        <asp:RegularExpressionValidator ID="revValue" runat="server" ControlToValidate="txtValue" ErrorMessage="A Valid Value Is Required" ValidationExpression="^[0-9]+$"></asp:RegularExpressionValidator>
+                        <asp:RegularExpressionValidator ID="revValue" runat="server" ControlToValidate="txtValue" ErrorMessage="A Valid Value Is Required" ValidationExpression="^[0-9]*$"></asp:RegularExpressionValidator>
                         <asp:RequiredFieldValidator ID="rfvValue" runat="server" ControlToValidate="txtValue" Display="Dynamic" ErrorMessage="Value Required">A Value Is Required</asp:RequiredFieldValidator>
                         <br />
                         <br />
@@ -53,6 +56,7 @@
  
 
 <!-- Link to JavaScipt plugins, needed for things like the dropdown menu to work.  BOTH files are required. -->
+   
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     
     <script src="js/bootstrap.min.js"></script>

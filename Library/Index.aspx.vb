@@ -133,7 +133,7 @@ Public Class Index
     End Sub
 
 
-    Private Function setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double)
+    Private Function setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double) As Integer
 
         'create new sql statement
         Dim strSQL As String = "SELECT Bid FROM books where [Title] = @title AND [Publisher] = @publisher AND [ISBN] = @isbn AND [EstValue] = @value"
@@ -149,7 +149,7 @@ Public Class Index
         Dim sqlDA As New SqlDataAdapter
         Dim ds As New DataSet
 
-        Dim returnvariable
+        Dim returnvariable As Integer = -1
 
         Try
             'open connection
@@ -401,4 +401,14 @@ Public Class Index
 
     End Sub
 
+
+    Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
+
+        txtTitle.Text = "Some Title"
+        txtAuthor.Text = "Some Author"
+        txtPublisher.Text = "Some pb"
+        txtISBN.Text = "1234567876"
+        txtValue.Text = "1234"
+
+    End Sub
 End Class
