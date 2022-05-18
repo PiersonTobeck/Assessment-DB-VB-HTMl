@@ -3,20 +3,20 @@
     'Declaration of variables
 
     Private Title As String
-    Private Author As String
+    Private Author As Author
     Private Publisher As String
     Private Isbn As Double
     Private EstValue As Double
 
     'Constructors
 
-    Public Sub New(a As String, b As String, c As String, d As Double, e As Double)
+    Public Sub New(Title As String, Author As Author, Publisher As String, ISBN As Double, Value As Double)
 
-        Me.Title = a
-        Me.Author = b
-        Me.Publisher = c
-        Me.Isbn = d
-        Me.EstValue = e
+        Me.Title = Title
+        Me.Author = Author
+        Me.Publisher = Publisher
+        Me.Isbn = ISBN
+        Me.EstValue = Value
 
     End Sub
 
@@ -43,7 +43,7 @@
     ''' </summary>
     ''' <returns> string </returns>
 
-    Public Function GetAuthor() As String
+    Public Function GetAuthor() As Author
 
         Return Me.Author
 
@@ -76,23 +76,9 @@
     ''' </summary>
     ''' <returns> Double </returns>
 
-    Public Function GetEstValue() As Double
+    Public Function GetValue() As Double
 
         Return Me.EstValue
-
-    End Function
-
-    ''' <summary>
-    ''' Returns all information of selected book 
-    ''' </summary>
-    ''' <returns> string </returns>
-    Public Function GetBookInfo()
-
-        Return String.Format("Title: " & Me.GetTitle &
-                             Environment.NewLine + " Author: " & Me.GetAuthor &
-                             Environment.NewLine + " Publisher: " & Me.GetPublisher &
-                             Environment.NewLine + " Isbn: " & Me.GetIsbn &
-                             Environment.NewLine + " EstValue: " & Me.GetEstValue)
 
     End Function
 
@@ -114,7 +100,7 @@
     ''' </summary>
     ''' <returns> Nothing </returns>
 
-    Public Function SetAuthor(x As String)
+    Public Function SetAuthor(x As Author)
 
         Me.Author = x
 

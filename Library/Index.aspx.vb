@@ -5,28 +5,48 @@ Public Class Index
     Inherits System.Web.UI.Page
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+        Dim Duplicatebook As Integer = CheckDuplicateBook(txtISBN.Text)
+        Dim duplicateauthor As Integer = CheckDuplicateAuthor(txtISBN.Text)
 
-        InsertRecord()
+        If Duplicatebook = 0 Then
+
+
+            InsertRecord()
+
+
+            If duplicateauthor = 0 Then
+
+                Dim CurrentAuthor As New Author(txtAuthor.Text)
+
+                InsertAuthor(CurrentAuthor)
+
+            End If
+
+        End If
 
     End Sub
 
-    Public Sub InsertRecord()
+    Public Function InsertRecord() As String
 
-        'grab the data
-        Dim strTitle As String = txtTitle.Text
-        Dim strAuthor As String = txtAuthor.Text
-        Dim strPublisher As String = txtPublisher.Text
-        Dim Intisbn As Double = Convert.ToDouble(txtISBN.Text)
-        Dim intValue As Double = Convert.ToDouble(txtValue.Text)
+
+        Dim currentAuthor As New Author(txtAuthor.Text)
+
+
+
+        Dim CurrentBook As New Book(txtTitle.Text, currentAuthor.getbook(), txtPublisher.Text, txtISBN.Text, txtValue.Text)
+
+        'Dim strTitle As String = txtTitle.Text
+        'Dim strAuthor As String = txtAuthor.Text
+        'Dim strPublisher As String = txtPublisher.Text
+        'Dim Intisbn As Double = Convert.ToDouble(txtISBN.Text)
+        'Dim intValue As Double = Convert.ToDouble(txtValue.Text)
 
         Dim AuthorID As String = String.Empty
         Dim BookID As String = String.Empty
 
-        'grab data for the Authors table
 
-        Dim AuthorArray As String() = Split(strAuthor)
 
-        Call InsertAuthor(AuthorArray(0), AuthorArray(1))
+        'Call InsertAuthor(AuthorArray(0), AuthorArray(1))
 
         'send the data 
 
@@ -45,10 +65,10 @@ Public Class Index
 
             With sqlCmd.Parameters
 
-                .AddWithValue("@title", strTitle)
-                .AddWithValue("@publisher", strPublisher)
-                .AddWithValue("@isbn", Intisbn)
-                .AddWithValue("@value", intValue)
+                .AddWithValue("@title", CurrentBook.GetTitle)
+                .AddWithValue("@publisher", CurrentBook.GetPublisher)
+                .AddWithValue("@isbn", CurrentBook.GetIsbn)
+                .AddWithValue("@value", CurrentBook.GetValue)
 
             End With
 
@@ -75,19 +95,21 @@ Public Class Index
 
 
         'set BookID                                
-        BookID = setSessionID(strTitle, strAuthor, strPublisher, Intisbn, intValue)
+        BookID = setSessionID(CurrentBook.GetTitle, "Author", CurrentBook.GetPublisher, CurrentBook.GetIsbn, CurrentBook.GetValue)
 
         'set AuthorID
 
-        AuthorID = getAuthorID(AuthorArray(0), AuthorArray(1))
+        AuthorID = getAuthorID(currentAuthor.getFName, currentAuthor.getLName)
 
         InsertBookAuthors(BookID, AuthorID)
 
         Response.Redirect("success.aspx")
 
-    End Sub
+        Return (BookID & " " & AuthorID)
 
-    Public Sub InsertAuthor(Firstname As String, lastname As String)
+    End Function
+
+    Public Sub InsertAuthor(author As Author)
         'send the data 
 
         Dim strconn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
@@ -105,8 +127,8 @@ Public Class Index
 
             With sqlCmd.Parameters
 
-                .AddWithValue("@fname", Firstname)
-                .AddWithValue("@lname", lastname)
+                .AddWithValue("@fname", author.getFName)
+                .AddWithValue("@lname", author.getLName)
             End With
 
             'execute query
@@ -132,6 +154,17 @@ Public Class Index
 
     End Sub
 
+    Public Function CheckDuplicateBook(isbn As Integer) As Integer
+
+
+        Return Nothing
+    End Function
+
+    Public Function CheckDuplicateAuthor(aid As Integer) As Integer
+
+
+        Return Nothing
+    End Function
 
     Private Function setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double) As Integer
 
@@ -175,14 +208,14 @@ Public Class Index
 
             If ds.Tables(0).Rows.Count > 0 Then
 
-                Dim intID As Integer = ds.Tables(0).Rows(0).Item(0)
+                Dim ISBNID As Integer = ds.Tables(0).Rows(0).Item(3)
 
                 'set session object
 
-                Session("Bid") = intID
+                Session("Bid") = ISBNID
 
                 'set return variable
-                returnvariable = intID
+                returnvariable = ISBNID
 
             End If
 
@@ -280,7 +313,9 @@ Public Class Index
 
         End Try
 
+#Disable Warning BC42104 ' Variable is used before it has been assigned a value
         Return returnvariable
+#Enable Warning BC42104 ' Variable is used before it has been assigned a value
 
     End Function
 
@@ -312,7 +347,9 @@ Public Class Index
 
             If ds.Tables(0).Rows.Count > 0 Then
 
+#Disable Warning BC42104 ' Variable is used before it has been assigned a value
                 intID(0) = ds.Tables(0).Rows(0).Item(0)
+#Enable Warning BC42104 ' Variable is used before it has been assigned a value
                 intID(1) = ds.Tables(0).Rows(1).Item(0)
 
                 'set session object
@@ -343,7 +380,9 @@ Public Class Index
 
         End Try
 
+#Disable Warning BC42105 ' Function doesn't return a value on all code paths
     End Function
+#Enable Warning BC42105 ' Function doesn't return a value on all code paths
     Private Sub InsertBookAuthors(BookID As Integer, AuthorID As Integer)
 
         'send the data 
@@ -404,11 +443,18 @@ Public Class Index
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
+        'submitdata()
+
+
+    End Sub
+
+    Public Sub submitdata()
+
         txtTitle.Text = "Some Title"
         txtAuthor.Text = "Some Author"
         txtPublisher.Text = "Some pb"
         txtISBN.Text = "1234567876"
         txtValue.Text = "1234"
-
     End Sub
+
 End Class
