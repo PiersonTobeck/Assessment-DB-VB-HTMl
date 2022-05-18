@@ -5,153 +5,28 @@ Public Class Index
     Inherits System.Web.UI.Page
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
+
         Dim Duplicatebook As Integer = CheckDuplicateBook(txtISBN.Text)
         Dim duplicateauthor As Integer = CheckDuplicateAuthor(txtISBN.Text)
+        Dim currentBook As New Book(txtTitle.Text, txtAuthor.Text, txtPublisher.Text, txtISBN.Text, txtValue.Text)
+        Dim CurrentAuthor As New Author(txtAuthor.Text)
+        Dim bookID As Integer = 0
+        Dim AuthorID As Integer = 0
 
         If Duplicatebook = 0 Then
 
-
-            InsertRecord()
-
+            currentBook.InsertBook()
 
             If duplicateauthor = 0 Then
 
-                Dim CurrentAuthor As New Author(txtAuthor.Text)
-
-                InsertAuthor(CurrentAuthor)
+                CurrentAuthor.InsertAuthor()
 
             End If
 
         End If
 
-    End Sub
-
-    Public Function InsertRecord() As String
-
-
-        Dim currentAuthor As New Author(txtAuthor.Text)
-
-
-
-        Dim CurrentBook As New Book(txtTitle.Text, currentAuthor.getbook(), txtPublisher.Text, txtISBN.Text, txtValue.Text)
-
-        'Dim strTitle As String = txtTitle.Text
-        'Dim strAuthor As String = txtAuthor.Text
-        'Dim strPublisher As String = txtPublisher.Text
-        'Dim Intisbn As Double = Convert.ToDouble(txtISBN.Text)
-        'Dim intValue As Double = Convert.ToDouble(txtValue.Text)
-
-        Dim AuthorID As String = String.Empty
-        Dim BookID As String = String.Empty
-
-
-
-        'Call InsertAuthor(AuthorArray(0), AuthorArray(1))
-
-        'send the data 
-
-        Dim strconn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
-        Dim strSQL As String = "INSERT INTO books ([Title], [Publisher], [ISBN], [ESTValue]) VALUES ("
-        strSQL &= "@title,@publisher,@isbn,@value)"
-        Dim sqlCmd As SqlCommand
-        Dim sqlConn As New SqlConnection(strconn)
-
-        Try
-
-
-            'open connection
-            sqlConn.Open()
-            sqlCmd = New SqlCommand(strSQL, sqlConn)
-
-            With sqlCmd.Parameters
-
-                .AddWithValue("@title", CurrentBook.GetTitle)
-                .AddWithValue("@publisher", CurrentBook.GetPublisher)
-                .AddWithValue("@isbn", CurrentBook.GetIsbn)
-                .AddWithValue("@value", CurrentBook.GetValue)
-
-            End With
-
-            'execute query
-            Dim i As Integer = sqlCmd.ExecuteNonQuery()
-
-            'check if it failed
-            If i = 0 Then
-
-                Throw New System.Exception("An exception has occurred.")
-
-            End If
-
-            sqlConn.Close()
-
-
-        Catch ex As Exception
-
-            MsgBox("An Eror has occured (01)")
-
-        End Try
-
         ClearForm()
-
-
-        'set BookID                                
-        BookID = setSessionID(CurrentBook.GetTitle, "Author", CurrentBook.GetPublisher, CurrentBook.GetIsbn, CurrentBook.GetValue)
-
-        'set AuthorID
-
-        AuthorID = getAuthorID(currentAuthor.getFName, currentAuthor.getLName)
-
-        InsertBookAuthors(BookID, AuthorID)
-
-        Response.Redirect("success.aspx")
-
-        Return (BookID & " " & AuthorID)
-
-    End Function
-
-    Public Sub InsertAuthor(author As Author)
-        'send the data 
-
-        Dim strconn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
-        Dim strSQL As String = "INSERT INTO authors ([FirstName], [LastName]) VALUES ("
-        strSQL &= "@fname,@lname)"
-        Dim sqlCmd As SqlCommand
-        Dim sqlConn As New SqlConnection(strconn)
-
-        Try
-
-
-            'open connection
-            sqlConn.Open()
-            sqlCmd = New SqlCommand(strSQL, sqlConn)
-
-            With sqlCmd.Parameters
-
-                .AddWithValue("@fname", author.getFName)
-                .AddWithValue("@lname", author.getLName)
-            End With
-
-            'execute query
-            Dim i As Integer = sqlCmd.ExecuteNonQuery()
-
-            'check if it failed
-            If i = 0 Then
-
-                Throw New System.Exception("An exception has occurred.")
-
-            End If
-
-            sqlConn.Close()
-
-
-
-        Catch ex As Exception
-
-            MsgBox("An Eror has occured (03)")
-
-        End Try
-
-
+        'currentBook.insertbookauthors
     End Sub
 
     Public Function CheckDuplicateBook(isbn As Integer) As Integer
@@ -439,7 +314,6 @@ Public Class Index
         txtValue.Text = String.Empty
 
     End Sub
-
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
