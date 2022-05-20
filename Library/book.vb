@@ -7,6 +7,9 @@ Public Class Book
 #Disable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
     Private Title As String
 #Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
+#Disable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
+    Private id As Integer
+#Enable Warning BC40004 ' Member conflicts with member in the base type and should be declared 'Shadows'
     Private Author As Author
     Private Publisher As String
     Private Isbn As Double
@@ -85,6 +88,12 @@ Public Class Book
 
     End Function
 
+    Public Function GetID() As Integer
+
+        Return Me.id
+
+    End Function
+
     ''' <summary>
     ''' Returns the Estimated Value of selected book
     ''' </summary>
@@ -134,6 +143,12 @@ Public Class Book
         Return Nothing
 
     End Function
+
+    Public Sub SetID(id As Integer)
+
+        Me.id = id
+
+    End Sub
 
     ''' <summary>
     ''' Sets the ISBN of selected book using user input
@@ -209,7 +224,7 @@ Public Class Book
 
     End Function
 
-    Private Function GetBookID() As Integer
+    Public Function GetBookID()
 
         'objects for communication with db
         Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
@@ -236,8 +251,6 @@ Public Class Book
 
             MsgBox("An Eror has occured (06)")
 
-            Response.Redirect("Index.aspx")
-
         Finally
 
             'tidy up resources
@@ -255,8 +268,59 @@ Public Class Book
 
         End Try
 
-        Return ds.Tables(0).Rows(0).Item(0)
+        Me.id = ds.Tables(0).Rows(0).Item(0)
+
+        Return Me.id
 
     End Function
+
+    Public Sub InsertBookAuthors(BookID As Integer, AuthorID As Integer)
+
+        'send the data 
+
+        Dim strconn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
+        Dim strSQL As String = "INSERT INTO bookauthors ([AID], [BID]) VALUES ("
+        strSQL &= "@aid,@bid)"
+        Dim sqlCmd As SqlCommand
+        Dim sqlConn As New SqlConnection(strconn)
+
+        Try
+
+
+            'open connection
+            sqlConn.Open()
+            sqlCmd = New SqlCommand(strSQL, sqlConn)
+
+            With sqlCmd.Parameters
+
+                .AddWithValue("@aid", AuthorID)
+                .AddWithValue("@bid", BookID)
+
+
+            End With
+
+            'execute query
+            Dim i As Integer = sqlCmd.ExecuteNonQuery()
+
+            'check if it failed
+            If i = 0 Then
+
+                Throw New System.Exception("An exception has occurred.")
+
+            End If
+
+            sqlConn.Close()
+
+
+
+        Catch ex As Exception
+
+            MsgBox("An Eror has occured (05)")
+
+        End Try
+
+    End Sub
+
+
 
 End Class

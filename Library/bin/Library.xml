@@ -61,17 +61,11 @@ Library
  </summary>
  <returns> Double </returns>
 </member>
-<member name="M:Library.Book.GetEstValue">
+<member name="M:Library.Book.GetValue">
  <summary>
  Returns the Estimated Value of selected book
  </summary>
  <returns> Double </returns>
-</member>
-<member name="M:Library.Book.GetBookInfo">
- <summary>
- Returns all information of selected book 
- </summary>
- <returns> string </returns>
 </member>
 <member name="M:Library.Book.SetTitle(System.String)">
  <summary>
@@ -79,7 +73,7 @@ Library
  </summary>
  <returns> Nothing </returns>
 </member>
-<member name="M:Library.Book.SetAuthor(System.String)">
+<member name="M:Library.Book.SetAuthor(Library.Author)">
  <summary>
  Sets the author of selected book using user input
  </summary>

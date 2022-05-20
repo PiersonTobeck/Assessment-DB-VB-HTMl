@@ -6,39 +6,168 @@ Public Class Index
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
 
-        Dim Duplicatebook As Integer = CheckDuplicateBook(txtISBN.Text)
-        Dim duplicateauthor As Integer = CheckDuplicateAuthor(txtISBN.Text)
         Dim currentBook As New Book(txtTitle.Text, txtAuthor.Text, txtPublisher.Text, txtISBN.Text, txtValue.Text)
+
         Dim CurrentAuthor As New Author(txtAuthor.Text)
-        Dim bookID As Integer = 0
-        Dim AuthorID As Integer = 0
 
-        If Duplicatebook = 0 Then
+        If CheckDuplicateBook(currentBook) = -1 Or CheckDuplicateAuthor(CurrentAuthor) = -1 Then
 
-            currentBook.InsertBook()
+            MsgBox("An error has occurred")
 
-            If duplicateauthor = 0 Then
-
-                CurrentAuthor.InsertAuthor()
-
-            End If
+            Exit Sub
 
         End If
 
-        ClearForm()
-        'currentBook.insertbookauthors
+        If CheckDuplicateBook(currentBook) = 1 Then
+
+
+            Try
+
+
+                Throw New Exception("An Exception has occured")
+
+
+            Catch ex As Exception
+
+                MsgBox("Book Already Exists")
+
+            End Try
+
+        End If
+
+        If CheckDuplicateBook(currentBook) = 0 Then
+
+            currentBook.InsertBook()
+
+            If CheckDuplicateAuthor(CurrentAuthor) = 0 Then
+
+                CurrentAuthor.InsertAuthor()
+
+
+                currentBook.InsertBookAuthors(currentBook.GetBookID, CurrentAuthor.GetAuthorID)
+
+            Else
+
+                'this will grab the id from the author that already exists, because they have the same name
+
+                currentBook.InsertBookAuthors(currentBook.GetBookID, CurrentAuthor.GetAuthorID)
+
+            End If
+
+            ClearForm()
+
+        End If
+
     End Sub
 
-    Public Function CheckDuplicateBook(isbn As Integer) As Integer
+    Public Function CheckDuplicateBook(book As Book) As Integer
+        'objects for communication with db
+        Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
 
+        Dim sqlcmd As SqlCommand
+        Dim sqlconn As New SqlConnection(strConn)
+        Dim sqlDA As New SqlDataAdapter
+        Dim ds As New DataSet
 
-        Return Nothing
+        'create new sql statement
+        Dim strSQL As String = "SELECT Bid FROM books WHERE [isbn] = " & book.GetIsbn
+
+        Try
+            'open connection
+            sqlconn.Open()
+            sqlcmd = New SqlCommand(strSQL, sqlconn)
+
+            'run query and fill ds
+            sqlDA.SelectCommand = sqlcmd
+            sqlDA.Fill(ds)
+
+        Catch ex As Exception
+            'no tables available (non duplicate)
+
+            Return -1
+
+            Exit Function
+
+        Finally
+
+            'tidy up resources
+
+            sqlDA.Dispose()
+            ds.Dispose()
+
+            'check connection status and close
+
+            If sqlconn.State = ConnectionState.Open Then
+
+                sqlconn.Close()
+
+            End If
+
+        End Try
+
+        If ds.Tables(0).Rows.Count < 1 Then
+
+            Return 1
+
+        End If
+
+        Return 0
+
     End Function
 
-    Public Function CheckDuplicateAuthor(aid As Integer) As Integer
+    Public Function CheckDuplicateAuthor(author As Author) As Integer
 
+        'objects for communication with db
+        Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
 
-        Return Nothing
+        Dim sqlcmd As SqlCommand
+        Dim sqlconn As New SqlConnection(strConn)
+        Dim sqlDA As New SqlDataAdapter
+        Dim ds As New DataSet
+
+        'create new sql statement
+        Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = " & author.getFName & " AND [LastName] = " & author.getLName
+
+        Try
+            'open connection
+            sqlconn.Open()
+            sqlcmd = New SqlCommand(strSQL, sqlconn)
+
+            'run query and fill ds
+            sqlDA.SelectCommand = sqlcmd
+            sqlDA.Fill(ds)
+
+        Catch ex As Exception
+
+            MsgBox("Somethig went wrong")
+
+            Return -1
+
+        Finally
+
+            'tidy up resources
+
+            sqlDA.Dispose()
+            ds.Dispose()
+
+            'check connection status and close
+
+            If sqlconn.State = ConnectionState.Open Then
+
+                sqlconn.Close()
+
+            End If
+
+        End Try
+
+        If ds.Tables(0).Rows.Count < 1 Then
+
+            Return 1
+
+        End If
+
+        Return 0
+
     End Function
 
     Private Function setSessionID(strTitle As String, strAuthor As String, strPublisher As String, intISBN As Double, intValue As Double) As Integer
@@ -317,7 +446,7 @@ Public Class Index
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
 
-        'submitdata()
+        submitdata()
 
 
     End Sub

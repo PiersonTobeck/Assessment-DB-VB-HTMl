@@ -112,7 +112,7 @@ Public Class Author
 
     End Function
 
-    Private Function GetAuthorID() As Integer
+    Public Function GetAuthorID() As Integer
 
         'objects for communication with db
         Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
@@ -123,7 +123,7 @@ Public Class Author
         Dim ds As New DataSet
 
         'create new sql statement
-        Dim strSQL As String = "SELECT Aid FROM books WHERE [FirstName] = " & Me.FName & "AND [LastName] = " & Me.Lname
+        Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = " & Me.FName & "AND [LastName] = " & Me.Lname
 
         Try
             'open connection
