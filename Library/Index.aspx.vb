@@ -31,6 +31,8 @@ Public Class Index
 
                 MsgBox("Book Already Exists")
 
+                Exit Sub
+
             End Try
 
         End If
@@ -70,7 +72,7 @@ Public Class Index
         Dim ds As New DataSet
 
         'create new sql statement
-        Dim strSQL As String = "SELECT Bid FROM books WHERE [isbn] = " & book.GetIsbn
+        Dim strSQL As String = "SELECT Bid FROM books WHERE [ISBN] = " & book.GetIsbn
 
         Try
             'open connection
@@ -84,16 +86,16 @@ Public Class Index
         Catch ex As Exception
             'no tables available (non duplicate)
 
+            sqlconn.Close()
+
+            sqlDA.Dispose()
+            ds.Dispose()
+
             Return -1
 
             Exit Function
 
         Finally
-
-            'tidy up resources
-
-            sqlDA.Dispose()
-            ds.Dispose()
 
             'check connection status and close
 
@@ -105,13 +107,22 @@ Public Class Index
 
         End Try
 
-        If ds.Tables(0).Rows.Count < 1 Then
+        If ds.Tables.Count < 1 Then
 
-            Return 1
+            sqlDA.Dispose()
+            ds.Dispose()
+
+            Return 0
 
         End If
 
-        Return 0
+        'tidy up resources
+
+        sqlDA.Dispose()
+        ds.Dispose()
+
+
+        Return 1
 
     End Function
 
@@ -126,7 +137,7 @@ Public Class Index
         Dim ds As New DataSet
 
         'create new sql statement
-        Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = " & author.getFName & " AND [LastName] = " & author.getLName
+        Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = '" & author.getFName & "' AND [LastName] = '" & author.getLName & "'"
 
         Try
             'open connection
@@ -139,16 +150,15 @@ Public Class Index
 
         Catch ex As Exception
 
-            MsgBox("Somethig went wrong")
+            MsgBox("Something went wrong")
+            sqlconn.Close()
+
+            sqlDA.Dispose()
+            ds.Dispose()
 
             Return -1
 
         Finally
-
-            'tidy up resources
-
-            sqlDA.Dispose()
-            ds.Dispose()
 
             'check connection status and close
 
@@ -156,17 +166,26 @@ Public Class Index
 
                 sqlconn.Close()
 
+
             End If
 
         End Try
 
-        If ds.Tables(0).Rows.Count < 1 Then
+        If ds.Tables.Count < 1 Then
 
-            Return 1
+            sqlDA.Dispose()
+            ds.Dispose()
+
+            Return 0
 
         End If
 
-        Return 0
+        'tidy up resources
+
+        sqlDA.Dispose()
+        ds.Dispose()
+
+        Return 1
 
     End Function
 

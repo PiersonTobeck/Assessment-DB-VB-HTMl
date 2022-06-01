@@ -123,7 +123,7 @@ Public Class Author
         Dim ds As New DataSet
 
         'create new sql statement
-        Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = " & Me.FName & "AND [LastName] = " & Me.Lname
+        Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = '" & Me.FName & "' AND [LastName] = '" & Me.Lname & "'"
 
         Try
             'open connection

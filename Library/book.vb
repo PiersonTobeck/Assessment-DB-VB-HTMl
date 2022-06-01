@@ -299,26 +299,11 @@ Public Class Book
 
             End With
 
-            'execute query
-            Dim i As Integer = sqlCmd.ExecuteNonQuery()
-
-            'check if it failed
-            If i = 0 Then
-
-                Throw New System.Exception("An exception has occurred.")
-
-            End If
-
-            sqlConn.Close()
-
-
+            sqlCmd.ExecuteNonQuery()
 
         Catch ex As Exception
 
-            MsgBox("An Eror has occured (05)")
-
         End Try
-
     End Sub
 
 
