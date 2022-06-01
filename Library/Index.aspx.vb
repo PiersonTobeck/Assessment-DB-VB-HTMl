@@ -6,11 +6,13 @@ Public Class Index
 
     Protected Sub btnSubmit_Click(sender As Object, e As EventArgs) Handles btnSubmit.Click
 
-        Dim currentBook As New Book(txtTitle.Text, txtAuthor.Text, txtPublisher.Text, txtISBN.Text, txtValue.Text)
+        Dim CurrentBook As Book = New Book(txtTitle.Text, txtAuthor.Text, txtPublisher.Text, txtISBN.Text, txtValue.Text)
 
         Dim CurrentAuthor As New Author(txtAuthor.Text)
+        Dim BookExists As Integer = CheckDuplicateBook(currentBook)
 
-        If CheckDuplicateBook(currentBook) = -1 Or CheckDuplicateAuthor(CurrentAuthor) = -1 Then
+
+        If BookExists = -1 Then 'Or CheckDuplicateAuthor(CurrentAuthor) = -1 Then
 
             MsgBox("An error has occurred")
 
@@ -18,22 +20,25 @@ Public Class Index
 
         End If
 
-        If CheckDuplicateBook(currentBook) = 1 Then
+        If BookExists = 1 Then
+            MsgBox("Book Already Exists")
+
+            Exit Sub
 
 
-            Try
+            'Try
+
+            'Throw New Exception("An Exception has occured")
 
 
-                Throw New Exception("An Exception has occured")
 
+            'Catch ex As Exception
 
-            Catch ex As Exception
+            '    MsgBox("Book Already Exists")
 
-                MsgBox("Book Already Exists")
+            '    Exit Sub
 
-                Exit Sub
-
-            End Try
+            'End Try
 
         End If
 
@@ -65,7 +70,7 @@ Public Class Index
     Public Function CheckDuplicateBook(book As Book) As Integer
         'objects for communication with db
         Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
-
+        Dim RowCount As Integer = 0
         Dim sqlcmd As SqlCommand
         Dim sqlconn As New SqlConnection(strConn)
         Dim sqlDA As New SqlDataAdapter
@@ -83,21 +88,20 @@ Public Class Index
             sqlDA.SelectCommand = sqlcmd
             sqlDA.Fill(ds)
 
+            RowCount = ds.Tables(0).Rows.Count
+
         Catch ex As Exception
             'no tables available (non duplicate)
 
             sqlconn.Close()
 
-            sqlDA.Dispose()
-            ds.Dispose()
-
             Return -1
-
-            Exit Function
 
         Finally
 
             'check connection status and close
+            sqlDA.Dispose()
+            ds.Dispose()
 
             If sqlconn.State = ConnectionState.Open Then
 
@@ -107,22 +111,12 @@ Public Class Index
 
         End Try
 
-        If ds.Tables.Count < 1 Then
-
-            sqlDA.Dispose()
-            ds.Dispose()
-
-            Return 0
+        If RowCount > 0 Then
+            Return 1
 
         End If
 
-        'tidy up resources
-
-        sqlDA.Dispose()
-        ds.Dispose()
-
-
-        Return 1
+        Return 0
 
     End Function
 
@@ -171,21 +165,22 @@ Public Class Index
 
         End Try
 
-        If ds.Tables.Count < 1 Then
 
-            sqlDA.Dispose()
-            ds.Dispose()
+        'If ds.Tables(0).Rows(0).ItemArray(0) > 0 Then
 
-            Return 0
+        '    sqlDA.Dispose()
+        '    ds.Dispose()
 
-        End If
+        '    Return 1
+
+        'End If
 
         'tidy up resources
 
         sqlDA.Dispose()
         ds.Dispose()
 
-        Return 1
+        Return 0
 
     End Function
 
