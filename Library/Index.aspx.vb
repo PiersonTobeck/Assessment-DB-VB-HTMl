@@ -9,7 +9,8 @@ Public Class Index
         Dim CurrentBook As Book = New Book(txtTitle.Text, txtAuthor.Text, txtPublisher.Text, txtISBN.Text, txtValue.Text)
 
         Dim CurrentAuthor As New Author(txtAuthor.Text)
-        Dim BookExists As Integer = CheckDuplicateBook(currentBook)
+        Dim BookExists As Integer = CheckDuplicateBook(CurrentBook)
+        Dim AuthorExists As Integer = CheckDuplicateAuthor(CurrentAuthor)
 
 
         If BookExists = -1 Then 'Or CheckDuplicateAuthor(CurrentAuthor) = -1 Then
@@ -21,43 +22,31 @@ Public Class Index
         End If
 
         If BookExists = 1 Then
+
             MsgBox("Book Already Exists")
 
             Exit Sub
 
-
-            'Try
-
-            'Throw New Exception("An Exception has occured")
-
-
-
-            'Catch ex As Exception
-
-            '    MsgBox("Book Already Exists")
-
-            '    Exit Sub
-
-            'End Try
-
         End If
 
-        If CheckDuplicateBook(currentBook) = 0 Then
+        If BookExists= 0 Then
 
             currentBook.InsertBook()
 
-            If CheckDuplicateAuthor(CurrentAuthor) = 0 Then
+            If AuthorExists = 0 Then
 
                 CurrentAuthor.InsertAuthor()
 
 
-                currentBook.InsertBookAuthors(currentBook.GetBookID, CurrentAuthor.GetAuthorID)
+                CurrentBook.InsertBookAuthors(CurrentBook.GetBookID, CurrentAuthor.GetAuthorID)
 
-            Else
+            End If
+
+            If AuthorExists = 1 Then
 
                 'this will grab the id from the author that already exists, because they have the same name
 
-                currentBook.InsertBookAuthors(currentBook.GetBookID, CurrentAuthor.GetAuthorID)
+                CurrentBook.InsertBookAuthors(CurrentBook.GetBookID, CurrentAuthor.GetAuthorID)
 
             End If
 
@@ -130,6 +119,8 @@ Public Class Index
         Dim sqlDA As New SqlDataAdapter
         Dim ds As New DataSet
 
+        Dim rowcount As Integer = 0
+
         'create new sql statement
         Dim strSQL As String = "SELECT Aid FROM authors WHERE [FirstName] = '" & author.getFName & "' AND [LastName] = '" & author.getLName & "'"
 
@@ -141,6 +132,8 @@ Public Class Index
             'run query and fill ds
             sqlDA.SelectCommand = sqlcmd
             sqlDA.Fill(ds)
+
+            rowcount = ds.Tables(0).Rows.Count
 
         Catch ex As Exception
 
@@ -179,6 +172,11 @@ Public Class Index
 
         sqlDA.Dispose()
         ds.Dispose()
+
+        If rowcount > 0 Then
+            Return 1
+
+        End If
 
         Return 0
 
@@ -459,9 +457,6 @@ Public Class Index
     End Sub
 
     Protected Sub Page_Load(sender As Object, e As EventArgs) Handles Me.Load
-
-        submitdata()
-
 
     End Sub
 
