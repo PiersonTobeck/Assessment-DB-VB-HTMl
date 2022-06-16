@@ -1,0 +1,291 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+Library
+</name>
+</assembly>
+<members>
+<member name="T:Library.My.MyWebExtension">
+ <summary>
+ Module used to define the properties that are available in the My Namespace for Web projects.
+ </summary>
+ <remarks></remarks>
+</member>
+<member name="P:Library.My.MyWebExtension.Computer">
+ <summary>
+ Returns information about the host computer.
+ </summary>
+</member>
+<member name="P:Library.My.MyWebExtension.User">
+ <summary>
+ Returns information for the current Web user.
+ </summary>
+</member>
+<member name="P:Library.My.MyWebExtension.Request">
+ <summary>
+ Returns Request object.
+ </summary>
+</member>
+<member name="P:Library.My.MyWebExtension.Response">
+ <summary>
+ Returns Response object.
+ </summary>
+</member>
+<member name="P:Library.My.MyWebExtension.Log">
+ <summary>
+ Returns the Asp log object.
+ </summary>
+</member>
+<member name="M:Library.Book.GetTitle">
+ <summary>
+ Returns the title of selected book
+ </summary>
+ <returns> string </returns>
+</member>
+<member name="M:Library.Book.GetAuthor">
+ <summary>
+ Returns the Author of selected book
+ </summary>
+ <returns> string </returns>
+</member>
+<member name="M:Library.Book.GetPublisher">
+ <summary>
+ Returns the Publisher of selected book
+ </summary>
+ <returns> string </returns>
+</member>
+<member name="M:Library.Book.GetIsbn">
+ <summary>
+ Returns the ISBN of selected book
+ </summary>
+ <returns> Double </returns>
+</member>
+<member name="M:Library.Book.GetValue">
+ <summary>
+ Returns the Estimated Value of selected book
+ </summary>
+ <returns> Double </returns>
+</member>
+<member name="M:Library.Book.SetTitle(System.String)">
+ <summary>
+ Sets the title of selected book using user input
+ </summary>
+ <returns> Nothing </returns>
+</member>
+<member name="M:Library.Book.SetAuthor(Library.Author)">
+ <summary>
+ Sets the author of selected book using user input
+ </summary>
+ <returns> Nothing </returns>
+</member>
+<member name="M:Library.Book.SetPublisher(System.String)">
+ <summary>
+ Sets the publisher of selected book using user input
+ </summary>
+ <returns> Nothing </returns>
+ 
+</member>
+<member name="M:Library.Book.SetIsbn(System.Double)">
+ <summary>
+ Sets the ISBN of selected book using user input
+ </summary>
+ <returns> Nothing </returns>
+</member>
+<member name="M:Library.Book.SetEstValue(System.Double)">
+ <summary>
+ Sets the estimated value of selected book using user input
+ </summary>
+ <returns> Nothing </returns>
+</member>
+<member name="F:Library.Index._form1">
+<summary>
+form1 control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._pnlBookForm">
+<summary>
+pnlBookForm control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._txtTitle">
+<summary>
+txtTitle control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvTitle">
+<summary>
+rfvTitle control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._txtAuthor">
+<summary>
+txtAuthor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._revAuthor">
+<summary>
+revAuthor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvAuthor">
+<summary>
+rfvAuthor control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._txtPublisher">
+<summary>
+txtPublisher control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvPublisher">
+<summary>
+rfvPublisher control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._txtISBN">
+<summary>
+txtISBN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._revISBN">
+<summary>
+revISBN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvISBN">
+<summary>
+rfvISBN control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._txtValue">
+<summary>
+txtValue control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._revValue">
+<summary>
+revValue control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._rfvValue">
+<summary>
+rfvValue control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Index._btnSubmit">
+<summary>
+btnSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._frmMain">
+<summary>
+frmMain control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._pnlSearch">
+<summary>
+pnlSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._txtTitle">
+<summary>
+txtTitle control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._rfvTitle">
+<summary>
+rfvTitle control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Success._plhDataTable">
+<summary>
+plhDataTable control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+</members>
+</doc>
