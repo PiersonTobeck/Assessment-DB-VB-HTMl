@@ -251,6 +251,24 @@ Auto-generated field.
 To modify move field declaration from designer file to code-behind file.
 </remarks>
 </member>
+<member name="F:Library.Search._ddlCategory">
+<summary>
+ddlCategory control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._rfvList">
+<summary>
+rfvList control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:Library.Search._pnlSearch">
 <summary>
 pnlSearch control.
@@ -272,6 +290,42 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:Library.Search._rfvTitle">
 <summary>
 rfvTitle control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._BtnSearch">
+<summary>
+BtnSearch control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._DdlSearchAll">
+<summary>
+DdlSearchAll control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._RfvSearchAll">
+<summary>
+RfvSearchAll control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Search._BtnSearchAll">
+<summary>
+BtnSearchAll control.
 </summary>
 <remarks>
 Auto-generated field.
