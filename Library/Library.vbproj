@@ -122,6 +122,7 @@
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="Globals.vb" />
     <Compile Include="Index.aspx.designer.vb">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>

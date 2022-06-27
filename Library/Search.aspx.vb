@@ -24,23 +24,31 @@ Public Class Search
 
     Private Function SearchAll(type As String)
 
+        Dim strSQL As String
+
+        If type = "Books" Then
+
+            strSQL = "SELECT title FROM books"
+
+        ElseIf type = "Publisher" Then
+
+            strSQL = "SELECT publisher FROM books"
+
+        ElseIf type = "Author" Then
+
+            strSQL = "SELECT * FROM authors"
+
+        End If
 
         'create new sql statement
-        Dim strSQL As String = "SELECT * FROM books"
-
         'objects for communication with db
         Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
-
 
         Dim sqlcmd As SqlCommand
         Dim sqlconn As New SqlConnection(strConn)
         Dim sqlDA As New SqlDataAdapter
 
-        Dim dss As DataSet()
-
         Dim ds As New DataSet
-        Dim ds2 As New DataSet
-        Dim ds3 As New DataSet
 
         Try
             'open connection
@@ -52,25 +60,6 @@ Public Class Search
             sqlDA.SelectCommand = sqlcmd
             sqlDA.Fill(ds)
 
-            'run query for authors
-
-            strSQL = "SELECT * FROM authors"
-            sqlcmd = New SqlCommand(strSQL, sqlconn)
-
-            sqlDA.SelectCommand = sqlcmd
-            sqlDA.Fill(ds2)
-
-            'run query for bookauthors
-
-            strSQL = "SELECT * FROM bookauthors"
-            sqlcmd = New SqlCommand(strSQL, sqlconn)
-
-            sqlDA.SelectCommand = sqlcmd
-            sqlDA.Fill(ds3)
-
-            dss(0) = ds
-            dss(1) = ds2
-            dss(2) = ds3
         Catch ex As Exception
 
             MsgBox("An Eror has occured (02)")
@@ -81,8 +70,6 @@ Public Class Search
 
             sqlDA.Dispose()
             ds.Dispose()
-            ds2.Dispose()
-            ds3.Dispose()
 
             'check connection status and close
 
@@ -94,13 +81,13 @@ Public Class Search
 
         End Try
 
-        Return dss
+        Return ds
 
     End Function
 
     Protected Sub BtnSearchAll_Click(sender As Object, e As EventArgs) Handles BtnSearchAll.Click
 
-        If DdlSearchAll.Text = "--choose--" Then
+        If DdlSearchAll.Text = "--Choose--" Then
 
             MsgBox("Not quite")
 
@@ -108,7 +95,9 @@ Public Class Search
 
         End If
 
-        Dim dataset = SearchAll(DdlSearchAll.Text)
+        Dim ds As DataSet = SearchAll(DdlSearchAll.Text)
+
+        MsgBox(ds.Tables(0).Rows(0).Item(0))
 
     End Sub
 
