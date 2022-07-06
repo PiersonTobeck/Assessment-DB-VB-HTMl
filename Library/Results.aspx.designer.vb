@@ -12,4 +12,13 @@ Option Explicit On
 
 
 Partial Public Class Results
+
+    '''<summary>
+    '''plhDataTable control.
+    '''</summary>
+    '''<remarks>
+    '''Auto-generated field.
+    '''To modify move field declaration from designer file to code-behind file.
+    '''</remarks>
+    Protected WithEvents plhDataTable As Global.System.Web.UI.WebControls.PlaceHolder
 End Class

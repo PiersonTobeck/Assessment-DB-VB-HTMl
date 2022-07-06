@@ -10,6 +10,12 @@
 
         <p>
            
+              <asp:placeholder ID="plhDataTable" runat="server">
+
+                    
+
+        </asp:placeholder>
+
         </p>
 
     </div>

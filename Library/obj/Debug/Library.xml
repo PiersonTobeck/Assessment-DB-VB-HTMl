@@ -98,6 +98,15 @@ Library
  </summary>
  <returns> Nothing </returns>
 </member>
+<member name="F:Library.Data._plhDataTable">
+<summary>
+plhDataTable control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
 <member name="F:Library.Index._form1">
 <summary>
 form1 control.
@@ -236,6 +245,15 @@ To modify move field declaration from designer file to code-behind file.
 <member name="F:Library.Index._btnSubmit">
 <summary>
 btnSubmit control.
+</summary>
+<remarks>
+Auto-generated field.
+To modify move field declaration from designer file to code-behind file.
+</remarks>
+</member>
+<member name="F:Library.Results._plhDataTable">
+<summary>
+plhDataTable control.
 </summary>
 <remarks>
 Auto-generated field.

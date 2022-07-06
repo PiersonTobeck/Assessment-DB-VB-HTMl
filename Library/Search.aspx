@@ -21,7 +21,7 @@
                     <asp:ListItem>Publisher</asp:ListItem>
                     <asp:ListItem>ISBN</asp:ListItem>
                     <asp:ListItem>Value</asp:ListItem>
-                    <asp:ListItem>Books</asp:ListItem>
+                    <asp:ListItem>Book</asp:ListItem>
                 </asp:DropDownList>
                  <asp:RequiredFieldValidator ID="rfvList" runat="server" ControlToValidate="ddlCategory" Display="Dynamic" ErrorMessage="A type Is Required " ></asp:RequiredFieldValidator>
         </p>
@@ -43,7 +43,7 @@
                    &nbsp; Select Type<sup>*</sup>:   
                   <asp:DropDownList ID="DdlSearchAll" runat="server">
                     <asp:ListItem>--Choose--</asp:ListItem>
-                    <asp:ListItem>Books</asp:ListItem>
+                    <asp:ListItem>Book</asp:ListItem>
                     <asp:ListItem>Author</asp:ListItem>
                     <asp:ListItem>Publisher</asp:ListItem>
 

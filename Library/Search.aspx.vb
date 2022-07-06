@@ -1,5 +1,4 @@
 ﻿Imports System.Data.SqlClient
-
 Public Class Search
 
     Inherits System.Web.UI.Page
@@ -26,17 +25,14 @@ Public Class Search
 
         Dim strSQL As String
 
-        If type = "Books" Then
 
-            strSQL = "SELECT title FROM books"
-
-        ElseIf type = "Publisher" Then
-
-            strSQL = "SELECT publisher FROM books"
-
-        ElseIf type = "Author" Then
+        If type = "Author" Then
 
             strSQL = "SELECT * FROM authors"
+
+        Else
+
+            strSQL = "SELECT * FROM books"
 
         End If
 
@@ -95,9 +91,12 @@ Public Class Search
 
         End If
 
-        Dim ds As DataSet = SearchAll(DdlSearchAll.Text)
+        Session("Search") = SearchAll(DdlSearchAll.Text)
 
-        MsgBox(ds.Tables(0).Rows(0).Item(0))
+        Session("Type") = DdlSearchAll.Text
+
+        Response.Redirect("results.aspx")
+
 
     End Sub
 

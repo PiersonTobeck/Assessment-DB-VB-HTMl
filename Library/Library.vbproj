@@ -99,6 +99,7 @@
     <Content Include="Contact.aspx" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\library.css" />
+    <Content Include="Data.aspx" />
     <Content Include="footer.html" />
     <Content Include="Header_Nav.html" />
     <Content Include="Index.aspx" />
@@ -122,7 +123,13 @@
       <DependentUpon>Contact.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
-    <Compile Include="Globals.vb" />
+    <Compile Include="Data.aspx.designer.vb">
+      <DependentUpon>Data.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Data.aspx.vb">
+      <DependentUpon>Data.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
     <Compile Include="Index.aspx.designer.vb">
       <DependentUpon>Index.aspx</DependentUpon>
     </Compile>
