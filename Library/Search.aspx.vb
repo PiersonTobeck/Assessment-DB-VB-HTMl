@@ -7,34 +7,30 @@ Public Class Search
 
     End Sub
 
-    Protected Sub BtnSearch_Click(sender As Object, e As EventArgs) Handles BtnSearch.Click
-
-        If ddlCategory.Text = "--Choose--" Then
-
-            MsgBox("Choose a type to search")
-
-            Exit Sub
-
-        End If
-
-        'Search(ddlCategory.Text)
-
-    End Sub
-
     Private Function SearchAll(type As String)
 
         Dim strSQL As String
-
 
         If type = "Author" Then
 
             strSQL = "SELECT * FROM authors"
 
-        Else
+        End If
+
+        If type = "Book" Then
 
             strSQL = "SELECT * FROM books"
 
         End If
+
+        If type = "Publisher" Then
+
+            strSQL = "SELECT DISTINCT Publisher FROM BOOKS"
+
+        End If
+
+
+
 
         'create new sql statement
         'objects for communication with db
@@ -49,7 +45,9 @@ Public Class Search
         Try
             'open connection
             sqlconn.Open()
+#Disable Warning BC42104 ' Variable is used before it has been assigned a value
             sqlcmd = New SqlCommand(strSQL, sqlconn)
+#Enable Warning BC42104 ' Variable is used before it has been assigned a value
 
             'run query and fill datasets
 

@@ -2,12 +2,15 @@
 
 <%  Response.WriteFile("Header_Nav.html") %>
 
+<link rel="stylesheet" href="css/data.css">
+
 <div class="container">
 
     <div class ="main">
 
 
         <asp:placeholder ID="plhDataTable" runat="server">
+
 
 
         </asp:placeholder>

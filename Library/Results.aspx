@@ -6,13 +6,9 @@
 
     <div class ="main">
 
-        <h1>Results</h1>
-
         <p>
            
-              <asp:placeholder ID="plhDataTable" runat="server">
-
-                    
+              <asp:placeholder ID="plhDataTable" runat="server">     
 
         </asp:placeholder>
 

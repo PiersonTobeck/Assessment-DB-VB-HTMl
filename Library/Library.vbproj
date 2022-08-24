@@ -98,11 +98,13 @@
     </Content>
     <Content Include="Contact.aspx" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\data.css" />
     <Content Include="css\library.css" />
     <Content Include="Data.aspx" />
     <Content Include="footer.html" />
     <Content Include="Header_Nav.html" />
     <Content Include="Index.aspx" />
+    <Content Include="Login.aspx" />
     <Content Include="RawData.aspx" />
     <Content Include="Results.aspx" />
     <Content Include="Search.aspx" />
@@ -135,6 +137,13 @@
     </Compile>
     <Compile Include="Index.aspx.vb">
       <DependentUpon>Index.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Login.aspx.vb">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />

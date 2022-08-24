@@ -23,24 +23,6 @@ Partial Public Class Search
     Protected WithEvents frmMain As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''ddlCategory control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents ddlCategory As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''rfvList control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rfvList As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
     '''pnlSearch control.
     '''</summary>
     '''<remarks>
@@ -48,33 +30,6 @@ Partial Public Class Search
     '''To modify move field declaration from designer file to code-behind file.
     '''</remarks>
     Protected WithEvents pnlSearch As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''txtTitle control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents txtTitle As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''rfvTitle control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents rfvTitle As Global.System.Web.UI.WebControls.RequiredFieldValidator
-
-    '''<summary>
-    '''BtnSearch control.
-    '''</summary>
-    '''<remarks>
-    '''Auto-generated field.
-    '''To modify move field declaration from designer file to code-behind file.
-    '''</remarks>
-    Protected WithEvents BtnSearch As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''DdlSearchAll control.
