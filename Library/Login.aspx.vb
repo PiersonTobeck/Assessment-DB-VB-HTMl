@@ -38,7 +38,7 @@ Public Class Login
 
                 Exit Sub
 
-            ElseIf Password = " " Then
+            ElseIf Password = " " Or Password = "password" Then
 
                 'User pressed ok with an empty string in the box
 
@@ -48,7 +48,7 @@ Public Class Login
 
                 'User gave an answer
 
-                If searchforlogin(LoginID, Password) = True Then
+                If searchforlogin(LoginID, Password, sender, e) = True Then
 
                     Response.Redirect("Index.aspx")
 
@@ -62,9 +62,9 @@ Public Class Login
 
     End Sub
 
-    Public Function searchforlogin(login, password) As Boolean
+    Public Function searchforlogin(login As String, password As String, ByVal sender As Object, ByVal e As System.EventArgs) As Boolean
 
-        Dim strSQL As String = "SELECT [Name], [Password] FROM logins"
+        Dim strSQL As String = "SELECT * FROM logins"
 
         'create new sql statement
         'objects for communication with db
@@ -92,25 +92,33 @@ Public Class Login
 
         End Try
 
+        For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
 
-        For i As Integer = 0 To ds.Tables(0).Rows(0).ItemArray.Length - 1
+            Dim p As String = CType(ds.Tables(0).Rows(i).Item(1), String)
 
-            If login.Equals(l) Then
+            If login = p.ToString() Then
 
                 MsgBox("This worked")
 
-                If ds.Tables(0).Rows(0).Item(i + 1).ToString = password Then
+                If ds.Tables(0).Rows(i).Item(2) = password Then
 
                     MsgBox("Successfull Login")
 
-                    Response.Redirect("Index.aspx")
+                    'Response.Redirect("Index.aspx")
+
+                    Return True
 
                 End If
+
+                MsgBox("Incorrect Password")
+
+                Page_Load(sender, e)
 
             End If
 
         Next
 
+        Return False
 
     End Function
 
