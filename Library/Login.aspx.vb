@@ -2,6 +2,11 @@
 Public Class Login
     Inherits System.Web.UI.Page
 
+    '
+    ''' <summary>
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Dim message As String = "Enter your Login ID"
@@ -15,7 +20,7 @@ Public Class Login
 
             Exit Sub
 
-        ElseIf LoginID = " " Then
+        ElseIf LoginID = "username" Then
 
             'User pressed ok with an empty string in the box
 
@@ -23,42 +28,37 @@ Public Class Login
 
         Else
 
-            'User gave an answer
+            'User gave an answer    
 
-            message = "Enter your Password"
+            message = "Enter Password for " & LoginID
+
             title = "Password"
 
-            Dim Password As String = InputBox(message, title, "password")
+            Dim Password As String = GetPassword(message, title)
 
-            If String.ReferenceEquals(Password, String.Empty) Then
-
-                'User pressed cancel
+            If Password = Nothing Or Password = "password" Then
 
                 Response.Write("<script>window.close();</script>")
 
                 Exit Sub
 
-            ElseIf Password = " " Or Password = "password" Then
+            End If
 
-                'User pressed ok with an empty string in the box
+            If Password <> "" Or Password <> "password" Then
 
-                Page_Load(sender, e)
+                    'User gave an answer
 
-            Else
+                    If searchforlogin(LoginID, Password, sender, e) = True Then
 
-                'User gave an answer
+                        Response.Redirect("Index.aspx")
 
-                If searchforlogin(LoginID, Password, sender, e) = True Then
+                    End If
 
-                    Response.Redirect("Index.aspx")
+                    Page_Load(sender, e)
 
                 End If
 
-
-
             End If
-
-        End If
 
     End Sub
 
@@ -98,8 +98,6 @@ Public Class Login
 
             If login = p.ToString() Then
 
-                MsgBox("This worked")
-
                 If ds.Tables(0).Rows(i).Item(2) = password Then
 
                     MsgBox("Successfull Login")
@@ -118,7 +116,31 @@ Public Class Login
 
         Next
 
+        MsgBox("Incorrect Login or Password")
+
         Return False
+
+    End Function
+
+    Public Function GetPassword(message, Title) As String
+
+        Dim password As String = InputBox(message, Title, "password")
+
+        If String.ReferenceEquals(password, String.Empty) Then
+
+            'User pressed cancel
+
+            Return Nothing
+
+        ElseIf password = "password" Then
+
+            'User pressed ok with an empty string in the box
+
+            GetPassword(message, Title)
+
+        End If
+
+        Return password
 
     End Function
 
