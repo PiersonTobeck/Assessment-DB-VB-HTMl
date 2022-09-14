@@ -11,7 +11,9 @@ Public Class Login
 
         Dim message As String = "Enter your Login ID"
         Dim title As String = "Login"
-        Dim LoginID As String = InputBox(message, title, "username")
+        'Dim LoginID As String = InputBox(message, title, "username")
+
+        Dim LoginID As String = InputBox(message, title, "Pie")
 
         If String.ReferenceEquals(LoginID, String.Empty) Then
             'User pressed cancel
@@ -100,7 +102,6 @@ Public Class Login
 
                 If ds.Tables(0).Rows(i).Item(2) = password Then
 
-                    MsgBox("Successfull Login")
 
                     'Response.Redirect("Index.aspx")
 
@@ -124,7 +125,9 @@ Public Class Login
 
     Public Function GetPassword(message, Title) As String
 
-        Dim password As String = InputBox(message, Title, "password")
+        'Dim password As String = InputBox(message, Title, "password")
+
+        Dim password As String = InputBox(message, Title, "Tob")
 
         If String.ReferenceEquals(password, String.Empty) Then
 

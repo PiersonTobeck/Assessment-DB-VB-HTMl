@@ -6,7 +6,7 @@
 
     <div class ="main">
 
-        <h1 style="margin-left: 40px">Search</h1>
+        <h1>Search</h1>
 
         <form id="frmMain" runat="server">
 

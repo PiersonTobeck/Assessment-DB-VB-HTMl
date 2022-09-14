@@ -16,6 +16,8 @@ Public Class Data
 
         Dim authinfo As ArrayList
 
+        Dim isbn As String
+
         If Id = Nothing And Type = Nothing And title = Nothing Then
 
             Response.Redirect("Index.aspx")
@@ -24,21 +26,23 @@ Public Class Data
 
         If Type = "Book" Then
 
-                bookinfo = displaybookinfo(Type, Id)
+            bookinfo = displaybookinfo(Type, Id)
 
-                actuallydisplay(bookinfo, Type, title)
+            isbn = findisbn(Id)
 
-            ElseIf Type = "Publisher" Then
+            actuallydisplay(bookinfo, Type, title, isbn)
+
+        ElseIf Type = "Publisher" Then
 
                 pubinfo = displaypubinfo(Type, title)
 
-                actuallydisplay(pubinfo, Type, title)
+            actuallydisplay(pubinfo, Type, title, Nothing)
 
-            ElseIf Type = "Author" Then
+        ElseIf Type = "Author" Then
 
                 authinfo = displayauthinfo(Type, Id)
 
-            actuallydisplay(authinfo, Type, title)
+            actuallydisplay(authinfo, Type, title, Nothing)
 
         End If
 
@@ -242,7 +246,7 @@ Public Class Data
 
         For i As Integer = 0 To BIDs.Count - 1
 
-            strSQL = "SELECT Title FROM books WHERE [Bid] = " & BIDs(i)
+            strSQL = "SELECT * FROM books WHERE [Bid] = " & BIDs(i)
 
             sqlcmd = New SqlCommand(strSQL, sqlconn)
 
@@ -251,10 +255,9 @@ Public Class Data
             sqlDA.SelectCommand = sqlcmd
             sqlDA.Fill(ds2)
 
-            names.Add(ds2.Tables(0).Rows(0).ItemArray(0))  '.ItemArray(1).ToString
+            names.Add(ds2.Tables(0).Rows(0).ItemArray(1))
 
             ds2.Clear()
-
 
         Next
 
@@ -278,15 +281,15 @@ Public Class Data
 
     End Function
 
-    Public Sub actuallydisplay(names As ArrayList, type As String, Title As String)
+    Public Sub actuallydisplay(names As ArrayList, type As String, Title As String, isbn As String)
 
         If type = "Book" Then
 
             Dim ids As New ArrayList
-            Try
-                'stringbuilder to create table
 
-                Dim strBuilder As StringBuilder = New StringBuilder()
+            'stringbuilder to create table
+
+            Dim strBuilder As StringBuilder = New StringBuilder()
 
                 'create table
 
@@ -295,45 +298,64 @@ Public Class Data
                 'add table header row
 
                 strBuilder.Append("<tr class =""results"">")
-                strBuilder.Append("<th class=""results""> " & "Authors of " & Title & " </th>")
+            strBuilder.Append("<th class=""results""> " & "Authors of " & Title & " </th>")
+            strBuilder.Append("<th class=""isbn""> ISBN </th>")
 
-                'close header row
+            'close header row
+            strBuilder.Append("</tr>")
+
+            'add table data row
+            Dim numAuthors As Integer = (names.Count - 1) / 2
+
+            For i As Integer = 0 To numAuthors Step 2
+
+                Dim firstname As String = names(i)
+
+                firstname = firstname.Replace(" ", String.Empty)
+
+                Dim lastname As String = names(i + 1)
+
+                lastname = lastname.Replace(" ", String.Empty)
+
+                ids.Add(searchforAid(firstname, lastname, type))
+
+                ids.Add(Nothing)
+
+                strBuilder.Append("<tr class=""results"">")
+                strBuilder.Append("<td class=""results""><a href='data.aspx?id=" & ids(i) & "&type=Author&title=" & firstname & " " & lastname & "'</a>" & firstname & " " & lastname & "</td>")
+
+                If numAuthors = 1 Then
+                    strBuilder.Append("<td class=""isbn"">" & isbn & "</td>")
+                ElseIf i = 0 Then
+                    strBuilder.Append("<td class=""isbn"" rowspan=""" & numAuthors & """>" & isbn & "</td>")
+
+                End If
+
+                'close table row& " 
                 strBuilder.Append("</tr>")
 
-                'add table data row
+            Next
 
-                For i As Integer = 0 To (names.Count - 1) / 2 Step 2
+            'add Table header row
 
-                    Dim firstname As String = names(i)
-
-                    firstname = firstname.Replace(" ", String.Empty)
-
-                    Dim lastname As String = names(i + 1)
-
-                    lastname = lastname.Replace(" ", String.Empty)
-
-                    ids.Add(searchforAid(firstname, lastname, type))
-
-                    ids.Add(Nothing)
-
-                    strBuilder.Append("<tr class=""results"">")
-                    strBuilder.Append("<td class=""results""><a href='data.aspx?id=" & ids(i) & "&type=Author&title=" & firstname & " " & lastname & "'</a>" & firstname & " " & lastname & "</td>")
-                    'close table row& " 
-                    strBuilder.Append("</tr>")
-
-                Next
-
-                'close table and add to placeholder
-                strBuilder.Append("</table>")
-
-                plhDataTable.Controls.Add(New LiteralControl(strBuilder.ToString()))
-
-                strBuilder.Clear()
-
-            Catch ex As Exception
+            'strBuilder.Append("<tr class =""isbn"">")
 
 
-            End Try
+            'close Header row
+            'strBuilder.Append("</tr>")
+
+            'add Table data row
+            'strBuilder.Append("<tr class=""isbn"">")
+
+            'close Table row& " 
+            'strBuilder.Append("</tr>")
+
+            '    close table and add to placeholder
+            '    strBuilder.Append("</table>")
+
+            plhDataTable.Controls.Add(New LiteralControl(strBuilder.ToString()))
+
+            strBuilder.Clear()
 
         End If
 
@@ -367,13 +389,13 @@ Public Class Data
 
                     strBuilder.Append("<tr class=""results"">")
                     strBuilder.Append("<td class=""results""><a href='data.aspx?id=" & ids(i) & "&type=Book&title=" & names(i) & "'</a>" & names(i) & "</td>")
-                        'close table row& " 
-                        strBuilder.Append("</tr>")
+            'close table row& " 
+            strBuilder.Append("</tr>")
 
-                    Next
+            Next
 
-                    'close table and add to placeholder
-                    strBuilder.Append("</table>")
+                'close table and add to placeholder
+                strBuilder.Append("</table>")
 
                 plhDataTable.Controls.Add(New LiteralControl(strBuilder.ToString()))
 
@@ -427,14 +449,14 @@ Public Class Data
 
 
                     strBuilder.Append("<tr class=""results"">")
-                        strBuilder.Append("<td class=""results""><a href='data.aspx?id=" & ids(i) & "&type=Book&title=" & names(i) & "'</a>" & names(i) & "</td>")
-                        'close table row& " 
-                        strBuilder.Append("</tr>")
+                    strBuilder.Append("<td class=""results""><a href='data.aspx?id=" & ids(i) & "&type=Book&title=" & names(i) & "'</a>" & names(i) & "</td>")
+                    'close table row& " 
+                    strBuilder.Append("</tr>")
 
-                    Next
+                Next
 
-                    'close table and add to placeholder
-                    strBuilder.Append("</table>")
+                'close table and add to placeholder
+                strBuilder.Append("</table>")
 
                 plhDataTable.Controls.Add(New LiteralControl(strBuilder.ToString()))
 
@@ -491,6 +513,48 @@ Public Class Data
     Public Function searchforBid(title, type)
 
         Dim strSQL As String = "SELECT Bid FROM books WHERE [title] = '" & title & "'"
+
+        'create new sql statement
+        'objects for communication with db
+        Dim strConn As String = "Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename='|DataDirectory|\books.mdf';Integrated Security=True"
+
+        Dim sqlcmd As SqlCommand
+        Dim sqlconn As New SqlConnection(strConn)
+        Dim sqlDA As New SqlDataAdapter
+
+        Dim ds As New DataSet
+
+        Try
+            'open connection
+            sqlconn.Open()
+            sqlcmd = New SqlCommand(strSQL, sqlconn)
+
+            'run query and fill datasets
+
+            sqlDA.SelectCommand = sqlcmd
+            sqlDA.Fill(ds)
+
+        Catch ex As Exception
+
+            MsgBox("An Eror has occured (02)")
+
+        Finally
+            'tidy up resources
+
+            sqlDA.Dispose()
+            ds.Dispose()
+
+        End Try
+
+        Return ds.Tables(0).Rows(0).ItemArray(0)
+
+
+    End Function
+
+    Public Function findisbn(id As Integer) As String
+
+
+        Dim strSQL As String = "SELECT ISBN FROM books WHERE [Bid] = '" & id & "'"
 
         'create new sql statement
         'objects for communication with db
