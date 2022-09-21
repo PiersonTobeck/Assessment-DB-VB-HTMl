@@ -1,13 +1,9 @@
 ﻿Imports System.Data.SqlClient
 Public Class Login
     Inherits System.Web.UI.Page
-
-    '
-    ''' <summary>
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        'prompt user with boxes to input login information 
 
         Dim message As String = "Enter your Login ID"
         Dim title As String = "Login"
@@ -98,7 +94,11 @@ Public Class Login
 
             Dim p As String = CType(ds.Tables(0).Rows(i).Item(1), String)
 
+            'username is correct
+
             If login = p.ToString() Then
+
+                'password is correct
 
                 If ds.Tables(0).Rows(i).Item(2) = password Then
 
@@ -124,6 +124,8 @@ Public Class Login
     End Function
 
     Public Function GetPassword(message, Title) As String
+
+        'ask user for a password
 
         'Dim password As String = InputBox(message, Title, "password")
 

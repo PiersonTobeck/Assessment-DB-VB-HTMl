@@ -105,6 +105,7 @@
     <Content Include="Header_Nav.html" />
     <Content Include="Index.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="logo.jpg" />
     <Content Include="RawData.aspx" />
     <Content Include="Results.aspx" />
     <Content Include="Search.aspx" />

@@ -3,6 +3,8 @@
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+
+        'check for type of user input
         Dim type As String = Session("Type")
 
         If type = "" Then

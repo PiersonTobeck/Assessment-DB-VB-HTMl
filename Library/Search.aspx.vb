@@ -9,7 +9,10 @@ Public Class Search
 
     Private Function SearchAll(type As String)
 
+
         Dim strSQL As String
+
+        'check for type of input
 
         If type = "Author" Then
 
@@ -28,9 +31,6 @@ Public Class Search
             strSQL = "SELECT DISTINCT Publisher FROM BOOKS"
 
         End If
-
-
-
 
         'create new sql statement
         'objects for communication with db
@@ -80,6 +80,8 @@ Public Class Search
     End Function
 
     Protected Sub BtnSearchAll_Click(sender As Object, e As EventArgs) Handles BtnSearchAll.Click
+
+        'simple search function
 
         If DdlSearchAll.Text = "--Choose--" Then
 

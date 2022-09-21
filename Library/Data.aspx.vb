@@ -4,6 +4,8 @@ Public Class Data
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
+        'create variables and grab information from previous page
+
         Dim Id = Request.QueryString("id")
 
         Dim Type = Request.QueryString("type")
@@ -18,11 +20,15 @@ Public Class Data
 
         Dim isbn As String
 
+        ' user accidentally accessed this page
+
         If Id = Nothing And Type = Nothing And title = Nothing Then
 
             Response.Redirect("Index.aspx")
 
         End If
+
+        ' select type and do applicable subroutines
 
         If Type = "Book" Then
 
@@ -110,6 +116,8 @@ Public Class Data
             For x As Integer = 0 To ds.Tables(0).Rows.Count - 1 Step 2
 
 #Disable Warning BC42104 ' Variable is used before it has been assigned a value
+
+                'fill the list of names for putting into table
 
                 names.Add(ds.Tables(0).Rows(i).ItemArray(1).ToString)  '.ItemArray(1).ToString
 
@@ -223,6 +231,7 @@ Public Class Data
 
             sqlDA.SelectCommand = sqlcmd
             sqlDA.Fill(ds)
+
 
             For i As Integer = 0 To ds.Tables(0).Rows.Count - 1
 
